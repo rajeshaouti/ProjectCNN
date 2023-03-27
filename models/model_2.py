@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import torch.utils.functional as F
+import torch.nn.functional as F
 
 # Build Architecture
 
