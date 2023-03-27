@@ -7,9 +7,9 @@ def data_stats(
 
   # CONVERT TO NUMPY and apply transform
   try:
-  train_set_data = train_data.transform(train_set_data.numpy())
+    train_set_data = train_data.transform(train_set_data.numpy())
   except:
-  train_set_data = train_data.transform()
+    train_set_data = train_data.transform()
 
   print(f'Shape of numpy data = {train_set_data.shape}')
   print(f'Shape of tensor data = {train_set_data.shape}')
