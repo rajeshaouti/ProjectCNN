@@ -9,21 +9,6 @@ import torch
 
 from torch.utils.tensorboard import SummaryWriter
 
-def visualize_input_data(train_set,class_names,rows,cols):
-
-  torch.manual_seed(42)
-
-  fig = plt.figure(figsize=(9, 9))
-  rows, cols = rows,cols
-  for i in range(1, rows * cols + 1):
-      random_idx = torch.randint(0, len(train_set), size=[1]).item()
-      img, label = train_set[random_idx]
-      fig.add_subplot(rows, cols, i)
-      plt.imshow(img.squeeze(), cmap="gray")
-      plt.title(class_names[label])
-      plt.axis(False);
-
-
 def create_writer(experiment_name: str, 
                   model_name: str, 
                   extra: str=None) -> torch.utils.tensorboard.writer.SummaryWriter():
