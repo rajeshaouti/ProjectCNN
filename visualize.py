@@ -12,7 +12,7 @@ def visualize_input_data(train_set,class_names,rows,cols):
       random_idx = torch.randint(0, len(train_set), size=[1]).item()
       img, label = train_set[random_idx]
       fig.add_subplot(rows, cols, i)
-      plt.imshow(img.squeeze(), cmap="gray")
+      plt.imshow(img.permute(1,2,0))
       plt.title(class_names[label])
       plt.axis(False);
 
