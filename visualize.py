@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-
+     
 def visualize_input_data(train_set,class_names,rows,cols):
 
   torch.manual_seed(42)
