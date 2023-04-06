@@ -6,7 +6,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt 
 
 import torch
-
+import torchvision
 from torch.utils.tensorboard import SummaryWriter
 
 def split_dataset(dataset:torchvision.datasets, split_size:float=0.2, seed:int=42):
