@@ -2,20 +2,31 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
      
-def visualize_input_data(train_set,class_names,rows,cols):
+def visualize_input_data(train_set,class_names,rows,cols,data_loader = False):
 
   torch.manual_seed(42)
 
   fig = plt.figure(figsize=(15, 15))
   rows, cols = rows,cols
-  for i in range(1, rows * cols + 1):
-      random_idx = torch.randint(0, len(train_set), size=[1]).item()
-      img, label = train_set[random_idx]
-      fig.add_subplot(rows, cols, i)
-      img = img.numpy()
-      plt.imshow(img.transpose(1,2,0))
-      plt.title(class_names[label])
-      plt.axis(True);
+  if data_loader:
+    imgTensor, labels = next(iter(train_dataloader))
+    for i in range(1, rows * cols + 1):
+        random_idx = torch.randint(0, len(imgTensor), size=[1]).item()
+        img, label = imgTensor[random_idx],labels[random_idx]
+        fig.add_subplot(rows, cols, i)
+        img = img.numpy()
+        plt.imshow(img.transpose(1,2,0))
+        plt.title(class_names[label])
+        plt.axis(True);
+  else:
+      for i in range(1, rows * cols + 1):
+        random_idx = torch.randint(0, len(train_set), size=[1]).item()
+        img, label = train_set[random_idx]
+        fig.add_subplot(rows, cols, i)
+        img = img.numpy()
+        plt.imshow(img.transpose(1,2,0))
+        plt.title(class_names[label])
+        plt.axis(True);
 
 def plot_misclassified_images(model,num_of_images,test_dataloader,classes):
 
