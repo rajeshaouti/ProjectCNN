@@ -9,7 +9,7 @@ def visualize_input_data(train_set,class_names,rows,cols,data_loader = False):
   fig = plt.figure(figsize=(15, 15))
   rows, cols = rows,cols
   if data_loader:
-    imgTensor, labels = next(iter(train_dataloader))
+    imgTensor, labels = next(iter(data_loader))
     for i in range(1, rows * cols + 1):
         random_idx = torch.randint(0, len(imgTensor), size=[1]).item()
         img, label = imgTensor[random_idx],labels[random_idx]
