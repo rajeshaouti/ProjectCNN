@@ -50,5 +50,4 @@ def create_dataloaders(
       pin_memory=True,
   )
 
-  class_names = train_set.classes
-  return train_dataloader, test_dataloader, class_names
+  return train_dataloader, test_dataloader
