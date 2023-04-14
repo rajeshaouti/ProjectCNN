@@ -9,6 +9,22 @@ import torch
 import torchvision
 from torch.utils.tensorboard import SummaryWriter
 
+import os
+def walk_through_dir(dir_path):
+  """
+  Walks through dir_path returning its contents.
+  Args:
+    dir_path (str or pathlib.Path): target directory
+  
+  Returns:
+    A print out of:
+      number of subdiretories in dir_path
+      number of images (files) in each subdirectory
+      name of each subdirectory
+  """
+  for dirpath, dirnames, filenames in os.walk(dir_path):
+    print(f"There are {len(dirnames)} directories and {len(filenames)} images in '{dirpath}'.")
+
 def split_dataset(dataset:torchvision.datasets, split_size:float=0.2, seed:int=42):
     """Randomly splits a given dataset into two proportions based on split_size and seed.
 
