@@ -161,6 +161,12 @@ def eval_model(model: torch.nn.Module,
         loss /= len(data_loader)
         acc /= len(data_loader)
         
+
+    # Get the model size in bytes then convert to megabytes
+    model_size = Path(MODEL_SAVE_PATH).stat().st_size // (1024*1024) # division converts bytes to megabytes (roughly) 
+#     print(f"model size: {model_size} MB")      
+        
     return {"model_name": model.__class__.__name__, # only works when model was created with a class
             "model_loss": loss.item(),
-            "model_acc": acc}
+            "model_acc": acc,
+            "model_size': model_size}
