@@ -187,7 +187,7 @@ def train(model: torch.nn.Module,
           scheduler.step()
           curr_lr = scheduler.get_last_lr()
         else:
-          curr_lr = [optimiser.state_dict()['param_groups'][0]['lr']]
+          curr_lr = [optimizer.state_dict()['param_groups'][0]['lr']]
 
         # Print out what's happening
         print(
