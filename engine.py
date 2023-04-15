@@ -62,6 +62,8 @@ def train_step(model: torch.nn.Module,
       # 5. Optimizer step
       optimizer.step()
 
+
+
       # Calculate and accumulate accuracy metric across all batches
       y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
       train_acc += (y_pred_class == y).sum().item()/len(y_pred)
@@ -128,6 +130,7 @@ def train(model: torch.nn.Module,
           loss_fn: torch.nn.Module,
           epochs: int,
           device: torch.device,
+          scheduler:None,
          writer: torch.utils.tensorboard.writer.SummaryWriter = None) -> Dict[str, List]:
     """Trains and tests a PyTorch model.
 
@@ -169,6 +172,7 @@ def train(model: torch.nn.Module,
 
     # Loop through training and testing steps for a number of epochs
     for epoch in tqdm(range(epochs)):
+
         train_loss, train_acc = train_step(model=model,
                                            dataloader=train_dataloader,
                                            loss_fn=loss_fn,
@@ -178,6 +182,12 @@ def train(model: torch.nn.Module,
                                         dataloader=test_dataloader,
                                         loss_fn=loss_fn,
                                         device=device)
+        # 6. scheduler
+        if scheduler:
+          scheduler.step()
+          curr_lr = scheduler.get_last_lr()
+        else:
+          curr_lr = [optimiser.state_dict()['param_groups'][0]['lr']]
 
         # Print out what's happening
         print(
@@ -185,7 +195,8 @@ def train(model: torch.nn.Module,
           f"train_loss: {train_loss:.4f} | "
           f"train_acc: {train_acc:.4f} | "
           f"test_loss: {test_loss:.4f} | "
-          f"test_acc: {test_acc:.4f}"
+          f"test_acc: {test_acc:.4f} | "
+          f"current_lr: {curr_lr[0]}  "
         )
 
         # Update results dictionary
