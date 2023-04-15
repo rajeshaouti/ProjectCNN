@@ -133,7 +133,8 @@ def accuracy_fn(y_true, y_pred):
 def eval_model(model: torch.nn.Module, 
                data_loader: torch.utils.data.DataLoader, 
                loss_fn: torch.nn.Module, 
-               accuracy_fn):
+               accuracy_fn,
+              MODEL_SAVE_PATH):
     """Returns a dictionary containing the results of model predicting on data_loader.
 
     Args:
