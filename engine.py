@@ -196,7 +196,7 @@ def train(model: torch.nn.Module,
           f"train_acc: {train_acc:.4f} | "
           f"test_loss: {test_loss:.4f} | "
           f"test_acc: {test_acc:.4f} | "
-          f"current_lr: {curr_lr[0]}  "
+          f"current_lr: {curr_lr[0]:.4f}  "
         )
 
         # Update results dictionary
